@@ -5,10 +5,10 @@ import { BrandLogo } from "../../components/shared/brand-logo/brand-logo";
 import { SairnaIcon } from "../../components/ui/sairna-icon";
 
 const linkClasses =
-  "text-[12px] max-[650px]:text-[11px] text-[#DCE6F0] transition-colors duration-200 hover:text-accent";
+  "text-[12.5px] max-[650px]:text-[11.5px] text-[#B8CADE] transition-colors duration-250 hover:text-accent";
 
 const headingClasses =
-  "mt-1.5 mb-2.5 font-heading text-[14px] max-[650px]:text-[13px] font-bold text-white";
+  "mt-1.5 mb-3 font-heading text-[14px] max-[650px]:text-[13px] font-bold text-white";
 
 const FOOTER_LINK_GROUPS = [
   {
@@ -35,22 +35,22 @@ const SOCIAL_ICONS = ["globe", "mail", "phone"];
 
 export function SiteFooter() {
   return (
-    <footer className="bg-navy text-[#DCE6F0]">
-      <div className="ablaq-ribbon" aria-hidden="true" />
-      <Container className="grid grid-cols-[2fr_1fr_1fr_1.25fr] max-[900px]:grid-cols-[1.5fr_1fr_1fr] max-[650px]:grid-cols-2 gap-10 max-[900px]:gap-[25px] max-[650px]:gap-x-4 max-[650px]:gap-y-[26px] pt-14 max-[650px]:pt-10 pb-[50px] max-[650px]:pb-[33px]">
+    <footer className="relative overflow-hidden border-t border-accent/20 bg-navy dark:bg-[#05080D] text-[#DCE6F0]">
+      <div className="ablaq-ribbon ablaq-ribbon-animated" aria-hidden="true" />
+      <Container className="relative z-10 grid grid-cols-[2fr_1fr_1fr_1.25fr] max-[900px]:grid-cols-[1.5fr_1fr_1fr] max-[650px]:grid-cols-2 gap-10 max-[900px]:gap-[25px] max-[650px]:gap-x-4 max-[650px]:gap-y-[26px] pt-14 max-[650px]:pt-10 pb-[50px] max-[650px]:pb-[33px]">
         <div className="max-[650px]:col-span-full">
           <BrandLogo variant="footer" />
-          <p className="my-[17px] max-[650px]:my-3 max-w-[310px] text-[13px] leading-[1.9] text-[#B8CADE]">
+          <p className="my-[17px] max-[650px]:my-3 max-w-[320px] text-[13px] leading-[1.85] text-[#9EB4CC]">
             البوابة الرقمية الأولى في سوريا لحجز تذاكر البولمانات بين المحافظات.
             على الرحب والسعة في كل رحلة، دربك سالك ومقعدك محفوظ.
           </p>
-          <div className="flex gap-[9px]">
+          <div className="flex gap-2.5">
             {SOCIAL_ICONS.map((iconName) => (
               <span
                 key={iconName}
-                className="grid size-[35px] place-items-center rounded-[10px] border border-white/20 text-[#F7F4EE]"
+                className="grid size-[36px] place-items-center rounded-xl border border-accent/25 bg-white/5 text-[#F7F4EE] transition-colors hover:border-accent hover:text-accent"
               >
-                <SairnaIcon name={iconName} size={17} />
+                <SairnaIcon name={iconName} size={16} />
               </span>
             ))}
           </div>
@@ -80,20 +80,20 @@ export function SiteFooter() {
           </Link>
           <div
             dir="ltr"
-            className="flex items-center gap-2 font-tabular text-[12px] text-accent"
+            className="flex items-center gap-2 font-tabular text-[12px] font-bold text-accent"
           >
-            <SairnaIcon name="mail" size={16} /> info@masar.sy
+            <SairnaIcon name="mail" size={15} /> info@masar.sy
           </div>
         </div>
       </Container>
 
-      <Container className="flex max-[650px]:flex-col items-center max-[650px]:items-start justify-between gap-3 border-t border-white/15 py-5 text-[11px] max-[650px]:text-[10px] text-[#9EB4CC]">
+      <Container className="flex max-[650px]:flex-col items-center max-[650px]:items-start justify-between gap-3 border-t border-white/10 py-5 text-[11px] max-[650px]:text-[10px] text-[#8DA2B9]">
         <span>
-          © 2026 مَسار | MASAR (masar.sy) — نموذج واجهات رقمية لحجز البولمانات
-          بين المحافظات السورية.
+          © 2026 مَسار | MASAR (masar.sy) — نظام حجز البولمانات بين المحافظات
+          السورية.
         </span>
-        <span>
-          أصالة الضيافة السورية بمعايير رقمية حديثة{" "}
+        <span className="flex items-center gap-1.5">
+          أصالة الضيافة السورية بمعايير رقمية حديثة
           <span className="inline-flex items-center justify-center text-accent">
             <SairnaIcon name="heart" size={13} />
           </span>

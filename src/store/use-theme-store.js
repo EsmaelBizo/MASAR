@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { getStoredItem, saveStoredItem } from '../lib/storage';
 
-const initialTheme = getStoredItem('masar-theme', 'light');
+const initialTheme = getStoredItem('masar-theme', 'dark');
 if (typeof document !== 'undefined') {
   document.documentElement.dataset.theme = initialTheme;
 }

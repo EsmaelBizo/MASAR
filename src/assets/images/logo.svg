@@ -1,16 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <!-- Eight-pointed star & Syrian Arch outer frame (Damascene Navy) -->
-  <path d="M60 6L74 20H94V40L108 54L94 68V98H26V68L12 54L26 40V20H46L60 6Z" fill="#163A5F" stroke="#C88A32" stroke-width="3.5" stroke-linejoin="round"/>
-  <!-- Inner Aleppo Pistachio Arch & Palmyra Gold trim -->
-  <path d="M60 15L70 25H86V42L96 52L86 62V94H34V62L24 52L34 42V25H50L60 15Z" fill="#2E6F5E" stroke="#C88A32" stroke-width="2.5" stroke-linejoin="round"/>
-  <!-- Inner Arch Sky Opening (Aleppo Limestone) -->
-  <path d="M40 94V56C40 42 49 32 60 27C71 32 80 42 80 56V94H40Z" fill="#F7F4EE"/>
-  <!-- Modern Pullman Coach inside the arch -->
-  <rect x="46" y="49" width="28" height="17" rx="4" fill="#163A5F" stroke="#C88A32" stroke-width="1.5"/>
-  <rect x="49" y="52" width="22" height="7" rx="2" fill="#F7F4EE"/>
-  <circle cx="51" cy="67" r="2.8" fill="#C88A32"/>
-  <circle cx="69" cy="67" r="2.8" fill="#C88A32"/>
-  <!-- Perspective Highway emerging from the arch -->
-  <path d="M47 68H73L92 108H28L47 68Z" fill="#2E6F5E" stroke="#F7F4EE" stroke-width="2"/>
-  <path d="M60 71V105" stroke="#F7F4EE" stroke-width="3" stroke-dasharray="5 4" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="MASAR Icon Dark Mode">
+  <title>مَسار | MASAR (Obsidian Dark Mode)</title>
+  <rect width="128" height="128" rx="24" fill="#090D14"/>
+  <!-- 8-Pointed Syrian Star (Rub el Hizb) -->
+  <path d="M 64.00,10.00 L 79.82,25.82 L 102.18,25.82 L 102.18,48.18 L 118.00,64.00 L 102.18,79.82 L 102.18,102.18 L 79.82,102.18 L 64.00,118.00 L 48.18,102.18 L 25.82,102.18 L 25.82,79.82 L 10.00,64.00 L 25.82,48.18 L 25.82,25.82 L 48.18,25.82 Z" fill="none" stroke="#3D8B76" stroke-width="5.5" stroke-linejoin="miter"/>
+  <!-- Heritage Geometric Corner Accents -->
+  <path d="M 64 16 L 56 26 L 64 22 L 72 26 Z" fill="#F7F4EE"/>
+  <path d="M 20 64 L 30 56 L 26 64 L 30 72 Z" fill="#F7F4EE"/>
+  <path d="M 108 64 L 98 56 L 102 64 L 98 72 Z" fill="#F7F4EE"/>
+  <!-- Syrian Pointed Arch -->
+  <path d="M 38 102 L 38 64 C 38 45, 48 34, 64 26 C 80 34, 90 45, 90 64 L 90 102" fill="none" stroke="#C88A32" stroke-width="6.5" stroke-linecap="square" stroke-linejoin="round"/>
+  <path d="M 34 102 L 94 102" fill="none" stroke="#C88A32" stroke-width="5.5" stroke-linecap="round"/>
+  <!-- Perspective Highway Path -->
+  <path d="M 46 102 L 57 62 L 60 62 L 54 102 Z" fill="#C88A32"/>
+  <path d="M 82 102 L 71 62 L 68 62 L 74 102 Z" fill="#C88A32"/>
+  <path d="M 62.2 65 L 65.8 65 L 66.4 73 L 61.6 73 Z" fill="#3D8B76"/>
+  <path d="M 61.2 79 L 66.8 79 L 67.6 89 L 60.4 89 Z" fill="#3D8B76"/>
+  <path d="M 59.8 95 L 68.2 95 L 69 102 L 59 102 Z" fill="#3D8B76"/>
 </svg>

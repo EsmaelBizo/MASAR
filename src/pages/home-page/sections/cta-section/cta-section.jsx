@@ -11,28 +11,31 @@ export function CtaSection() {
   const { ref, isVisible } = useScrollReveal();
 
   return (
-    <section className="pb-[85px] max-[650px]:pb-[54px]">
+    <section className="pb-[88px] max-[650px]:pb-[54px]">
       <Container>
         <div
           ref={ref}
           className={cn(
-            "group relative overflow-hidden rounded-[22px] bg-navy text-white shadow-card-md transition-all duration-350 hover:shadow-[0_26px_65px_rgba(22,58,95,0.28)]",
+            "group relative overflow-hidden rounded-[24px] border border-accent/35 bg-navy dark:bg-[#0D1420] text-white shadow-card-md transition-all duration-400 ease-[var(--ease-masar-out)] hover:border-accent/65 hover:shadow-[0_28px_75px_rgba(0,0,0,0.45)]",
             isVisible ? "animate-slide-up" : "opacity-0"
           )}
         >
           <div className="ablaq-ribbon ablaq-ribbon-animated" aria-hidden="true" />
-          <div className="flex max-[650px]:flex-col items-center max-[650px]:items-start justify-between gap-[30px] max-[650px]:gap-5 px-[56px] py-[40px] max-[650px]:px-6 max-[650px]:py-7">
-            <div className="relative z-10">
+          <div className="pointer-events-none absolute inset-0 bg-arch-grid opacity-50" aria-hidden="true" />
+
+          <div className="relative z-10 flex max-[650px]:flex-col items-center max-[650px]:items-start justify-between gap-[30px] max-[650px]:gap-5 px-[56px] py-[44px] max-[650px]:px-6 max-[650px]:py-7">
+            <div>
               <Eyebrow
-                className="border-accent/40 bg-white/10 text-[#F7F4EE]"
+                code="READY // BOARDING"
+                className="border-accent/40 bg-white/8 text-[#F7F4EE]"
                 starClassName="text-accent"
               >
                 على الرحب والسعة
               </Eyebrow>
-              <h2 className="mt-3 mb-1.5 font-heading text-[30px] max-[650px]:text-[24px] font-bold">
+              <h2 className="mt-3.5 mb-2 font-heading text-[32px] max-[650px]:text-[24px] font-bold leading-[1.25]">
                 مَسار.. دربك سالك ومقعدك محفوظ بين كل المحافظات
               </h2>
-              <p className="m-0 text-[14px] text-[#DCE6F0]">
+              <p className="m-0 max-w-[540px] text-[14.5px] text-[#CBD7E4]">
                 اختر وجهتك الآن، حدد رقم مقعدك في البولمان، واستلم تذكرتك
                 الإلكترونية فوراً.
               </p>
@@ -41,7 +44,7 @@ export function CtaSection() {
               to={ROUTES.RESULTS}
               className={cn(
                 buttonVariants({ variant: "primary" }),
-                "relative z-20"
+                "relative z-20 shrink-0"
               )}
             >
               احجز مقعدك الآن <SairnaIcon name="arrow-left" size={18} />

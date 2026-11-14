@@ -35,6 +35,10 @@ export function SiteHeader() {
     return location.pathname === linkPath;
   };
 
+  const openCommandPalette = () => {
+    window.dispatchEvent(new CustomEvent("masar:open-command"));
+  };
+
   const userInitial = (user?.name || "م").trim()[0];
   const userFirstName = user?.name ? user.name.split(" ")[0] : "";
 
@@ -42,20 +46,22 @@ export function SiteHeader() {
     <>
       <div className="ablaq-ribbon ablaq-ribbon-animated" aria-hidden="true" />
 
-      <div className="flex min-h-[34px] items-center justify-center gap-2.5 bg-primary-deep px-3 py-1.5 text-center text-[11px] max-[650px]:text-[10px] font-medium text-[#F7F4EE]">
-        <span className="size-2 animate-pulse-ring rounded-full bg-secondary" />{" "}
-        مَسار.. دربك سالك ومقعدك محفوظ بين كل المحافظات السورية{" "}
-        <span className="inline-flex items-center justify-center text-accent">
-          <SairnaIcon name="sparkle" size={13} />
+      <div className="flex min-h-[34px] items-center justify-center gap-2.5 border-b border-accent/15 bg-navy dark:bg-[#05080D] px-3 py-1.5 text-center text-[11px] max-[650px]:text-[10px] font-medium text-[#F7F4EE]">
+        <span className="size-2 animate-pulse-ring rounded-full bg-secondary" />
+        <span>
+          مَسار.. على الرحب والسعة بين كافة المحافظات السورية
+        </span>
+        <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 editorial-eyebrow text-[9px] text-accent">
+          MASAR.SY // V2.0
         </span>
       </div>
 
-      <header className="sticky top-0 z-80 border-b border-white/12 bg-navy/95 text-white shadow-[0_8px_30px_rgba(22,58,95,0.18)] backdrop-blur-md transition-colors duration-300">
-        <Container className="flex h-[82px] max-[900px]:h-[72px] max-[650px]:h-[66px] items-center justify-between gap-[22px]">
+      <header className="sticky top-0 z-80 border-b border-accent/20 bg-navy/92 dark:bg-[#090D14]/85 text-white shadow-[0_10px_35px_rgba(0,0,0,0.22)] backdrop-blur-xl transition-colors duration-350">
+        <Container className="flex h-[78px] max-[900px]:h-[70px] max-[650px]:h-[64px] items-center justify-between gap-4">
           <BrandLogo variant="header" />
 
           <nav
-            className="mx-auto flex max-[900px]:hidden items-center gap-7 max-[1150px]:gap-4"
+            className="mx-auto flex max-[960px]:hidden items-center gap-6 max-[1150px]:gap-4"
             aria-label="التنقل الرئيسي"
           >
             {MAIN_NAV_LINKS.map((link) => {
@@ -65,10 +71,10 @@ export function SiteHeader() {
                   key={link.id}
                   to={link.path}
                   className={cn(
-                    'relative py-7 text-[13px] max-[1150px]:text-[12px] font-semibold whitespace-nowrap transition-colors duration-250 after:content-[""] after:absolute after:right-1/2 after:bottom-[16px] after:h-[3px] after:rounded-full after:bg-accent after:translate-x-1/2 after:transition-[width] after:duration-300 after:ease-[var(--ease-masar-spring)]',
+                    'relative py-6 text-[13px] max-[1150px]:text-[12px] font-semibold whitespace-nowrap transition-colors duration-300 ease-[var(--ease-masar-out)] after:content-[""] after:absolute after:right-1/2 after:bottom-[14px] after:h-[2.5px] after:rounded-full after:bg-accent after:translate-x-1/2 after:transition-[width] after:duration-350 after:ease-[var(--ease-masar-out)]',
                     active
-                      ? "text-white after:w-[28px]"
-                      : "text-white/75 hover:text-white after:w-0 hover:after:w-[28px]"
+                      ? "text-white after:w-[26px]"
+                      : "text-white/70 hover:text-white after:w-0 hover:after:w-[26px]"
                   )}
                 >
                   {link.label}
@@ -77,18 +83,32 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <div className="flex items-center gap-3 max-[1150px]:gap-2">
+          <div className="flex items-center gap-2.5 max-[1150px]:gap-2">
             <button
-              className="group inline-grid size-10 max-[650px]:size-[35px] place-items-center rounded-xl border border-white/20 bg-white/10 text-white transition-all duration-300 hover:border-accent hover:bg-accent hover:text-white active:scale-95"
+              type="button"
+              onClick={openCommandPalette}
+              className="hidden md:inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-[11px] font-semibold text-white/80 transition-all duration-300 ease-[var(--ease-masar-out)] hover:border-accent/60 hover:bg-white/10 hover:text-white"
+              aria-label="فتح لوحة الأوامر السريعة"
+              title="البحث السريع (Ctrl+K / ⌘K)"
+            >
+              <SairnaIcon name="search" size={14} className="text-accent" />
+              <span>بحث سريع</span>
+              <kbd className="rounded border border-white/20 bg-black/25 px-1.5 py-0.5 font-tabular text-[10px] text-accent">
+                ⌘K
+              </kbd>
+            </button>
+
+            <button
+              className="group inline-grid size-10 max-[650px]:size-[35px] place-items-center rounded-xl border border-white/18 bg-white/8 text-white transition-all duration-300 ease-[var(--ease-masar-out)] hover:border-accent hover:bg-accent hover:text-white active:scale-95"
               type="button"
               onClick={toggleTheme}
               aria-label="تبديل المظهر"
-              title="تبديل المظهر"
+              title={theme === "dark" ? "الوضع النهاري الكلسي" : "الوضع الليلي الأوبسيدي"}
             >
-              <span className="inline-grid transition-transform duration-300 ease-[var(--ease-masar-spring)] group-hover:rotate-45">
+              <span className="inline-grid transition-transform duration-350 ease-[var(--ease-masar-spring)] group-hover:rotate-45">
                 <SairnaIcon
                   name={theme === "light" ? "moon" : "sun"}
-                  size={19}
+                  size={18}
                 />
               </span>
             </button>
@@ -96,23 +116,23 @@ export function SiteHeader() {
             {user ? (
               <Link
                 to={ROUTES.ACCOUNT}
-                className="flex items-center gap-2 rounded-xl px-2 py-1 text-[12px] font-bold text-white transition-colors hover:bg-white/10"
+                className="flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-2.5 py-1.5 text-[12px] font-bold text-white transition-colors hover:border-accent/50 hover:bg-white/10"
               >
-                <span className="grid size-[35px] max-[650px]:size-[33px] place-items-center rounded-full bg-accent font-bold text-white shadow-sm">
+                <span className="grid size-[32px] max-[650px]:size-[30px] place-items-center rounded-full bg-accent font-bold text-white shadow-sm">
                   {userInitial}
                 </span>
                 <span className="max-[650px]:hidden">{userFirstName}</span>
                 <SairnaIcon
                   name="chevron-down"
                   size={14}
-                  className="max-[650px]:hidden"
+                  className="max-[650px]:hidden text-accent"
                 />
               </Link>
             ) : (
               <>
                 <Link
                   to={ROUTES.LOGIN}
-                  className="max-[650px]:hidden whitespace-nowrap text-[13px] font-semibold text-white/90 transition-colors hover:text-accent"
+                  className="max-[650px]:hidden whitespace-nowrap px-2 text-[13px] font-semibold text-white/85 transition-colors hover:text-accent"
                 >
                   دخول
                 </Link>
@@ -123,19 +143,19 @@ export function SiteHeader() {
                     "max-[650px]:hidden"
                   )}
                 >
-                  إنشاء حساب <SairnaIcon name="arrow-left" size={16} />
+                  إنشاء حساب <SairnaIcon name="arrow-left" size={15} />
                 </Link>
               </>
             )}
 
             <button
               type="button"
-              className="hidden max-[900px]:inline-grid size-10 place-items-center rounded-xl border border-white/20 bg-white/10 text-white transition-colors hover:border-accent"
+              className="hidden max-[960px]:inline-grid size-10 place-items-center rounded-xl border border-white/18 bg-white/8 text-white transition-colors hover:border-accent"
               onClick={() => setMenuOpen((prev) => !prev)}
               aria-label="فتح القائمة"
               aria-expanded={menuOpen}
             >
-              <SairnaIcon name={menuOpen ? "x" : "menu"} size={24} />
+              <SairnaIcon name={menuOpen ? "x" : "menu"} size={22} />
             </button>
           </div>
         </Container>

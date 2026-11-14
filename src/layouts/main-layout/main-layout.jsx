@@ -5,6 +5,7 @@ import { SiteHeader } from "../site-header/site-header";
 import { SiteFooter } from "../site-footer/site-footer";
 import { ToastNotification } from "../../components/ui/toast-notification";
 import { TicketModal } from "../../components/shared/ticket-modal/ticket-modal";
+import { CommandPalette } from "../../components/shared/command-palette/command-palette";
 
 export function MainLayout() {
   const location = useLocation();
@@ -16,13 +17,14 @@ export function MainLayout() {
   const hideFooter = location.pathname === ROUTES.TRACKING;
 
   return (
-    <div className="overflow-hidden">
+    <div className="min-h-screen overflow-hidden bg-bg text-text">
       <SiteHeader />
       <main key={location.pathname} className="animate-page-enter">
         <Outlet />
       </main>
       {!hideFooter && <SiteFooter />}
       <TicketModal />
+      <CommandPalette />
       <ToastNotification />
     </div>
   );
