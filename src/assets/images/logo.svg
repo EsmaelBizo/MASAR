@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Eight-pointed star & Syrian Arch outer frame (Damascene Navy) -->
+  <path d="M60 6L74 20H94V40L108 54L94 68V98H26V68L12 54L26 40V20H46L60 6Z" fill="#163A5F" stroke="#C88A32" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- Inner Aleppo Pistachio Arch & Palmyra Gold trim -->
+  <path d="M60 15L70 25H86V42L96 52L86 62V94H34V62L24 52L34 42V25H50L60 15Z" fill="#2E6F5E" stroke="#C88A32" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Inner Arch Sky Opening (Aleppo Limestone) -->
+  <path d="M40 94V56C40 42 49 32 60 27C71 32 80 42 80 56V94H40Z" fill="#F7F4EE"/>
+  <!-- Modern Pullman Coach inside the arch -->
+  <rect x="46" y="49" width="28" height="17" rx="4" fill="#163A5F" stroke="#C88A32" stroke-width="1.5"/>
+  <rect x="49" y="52" width="22" height="7" rx="2" fill="#F7F4EE"/>
+  <circle cx="51" cy="67" r="2.8" fill="#C88A32"/>
+  <circle cx="69" cy="67" r="2.8" fill="#C88A32"/>
+  <!-- Perspective Highway emerging from the arch -->
+  <path d="M47 68H73L92 108H28L47 68Z" fill="#2E6F5E" stroke="#F7F4EE" stroke-width="2"/>
+  <path d="M60 71V105" stroke="#F7F4EE" stroke-width="3" stroke-dasharray="5 4" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "respan": {
+      "type": "http",
+      "url": "https://mcp.respan.ai/mcp/enterprise"
+    }
+  }
+}
