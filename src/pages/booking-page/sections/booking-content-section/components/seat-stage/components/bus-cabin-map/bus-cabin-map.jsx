@@ -1,12 +1,45 @@
 import { useEffect, useState } from "react";
-import { UNAVAILABLE_SEATS } from "../../../../../../data/booking-data";
 import { SairnaIcon } from "../../../../../../../../components/ui/sairna-icon";
 import { cn } from "../../../../../../../../lib/cn";
 
 const ROW_INDICES = Array.from({ length: 9 }, (_, i) => i + 1);
 
-export function BusCabinMap({ isVip, selectedSeats = [], onSeatClick }) {
+function getSeatCodes(isVip) {
+  return ROW_INDICES.flatMap((rowNum) =>
+    isVip
+      ? [`${rowNum}A`, `${rowNum}B`, `${rowNum}C`]
+      : [`${rowNum}A`, `${rowNum}B`, `${rowNum}C`, `${rowNum}D`]
+  );
+}
+
+function normalizeSeatCode(seat, seatCodes) {
+  const value =
+    seat && typeof seat === "object"
+      ? seat.seatNumber ?? seat.number ?? seat.code ?? seat.id
+      : seat;
+
+  if (typeof value === "number" || /^\d+$/.test(String(value))) {
+    return seatCodes[Number(value) - 1];
+  }
+
+  return String(value || "").trim().toUpperCase();
+}
+
+export function BusCabinMap({
+  isVip,
+  selectedSeats = [],
+  onSeatClick,
+  occupiedSeats = [],
+  isLoading = false,
+  isError = false,
+}) {
   const [shakingSeat, setShakingSeat] = useState(null);
+  const seatCodes = getSeatCodes(isVip);
+  const unavailableSeats = new Set(
+    occupiedSeats
+      .map((seat) => normalizeSeatCode(seat, seatCodes))
+      .filter(Boolean)
+  );
 
   useEffect(() => {
     if (!shakingSeat) return undefined;
@@ -15,7 +48,7 @@ export function BusCabinMap({ isVip, selectedSeats = [], onSeatClick }) {
   }, [shakingSeat]);
 
   const handleButtonClick = (seatCode, isBusy) => {
-    if (isBusy) {
+    if (isBusy || isLoading || isError) {
       setShakingSeat(seatCode);
       return;
     }
@@ -23,19 +56,23 @@ export function BusCabinMap({ isVip, selectedSeats = [], onSeatClick }) {
   };
 
   const renderSeatButton = (seatCode) => {
-    const isBusy = UNAVAILABLE_SEATS.has(seatCode);
+    const isBusy = unavailableSeats.has(seatCode);
     const isSelected = selectedSeats.includes(seatCode);
     const isShaking = shakingSeat === seatCode;
+    const isDisabled = isBusy || isLoading || isError;
 
     return (
       <button
         key={seatCode}
         type="button"
-        aria-disabled={isBusy}
+        disabled={isDisabled}
+        aria-disabled={isDisabled}
         onClick={() => handleButtonClick(seatCode, isBusy)}
         className={cn(
           "relative flex h-[44px] min-w-0 items-center justify-center rounded-xl border-2 font-tabular text-[12px] font-bold transition-all duration-150",
           isBusy &&
+            "cursor-not-allowed border-[#C8D0D8] bg-[#E2E6EC] dark:bg-[#2A394A] text-[#8E99A6] opacity-75",
+          (isLoading || isError) &&
             "cursor-not-allowed border-[#C8D0D8] bg-[#E2E6EC] dark:bg-[#2A394A] text-[#8E99A6] opacity-75",
           isShaking && "animate-shake",
           !isBusy &&

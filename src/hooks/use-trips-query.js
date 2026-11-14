@@ -1,5 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchCities, fetchCompanies, fetchTrips } from '../services/trips-service';
+import {
+  fetchCities,
+  fetchCompanies,
+  fetchTripSeats,
+  fetchTrips,
+} from '../services/trips-service';
 
 export const TRIP_QUERY_KEYS = {
   all: ['trips'],
@@ -27,5 +32,13 @@ export function useCompaniesQuery() {
   return useQuery({
     queryKey: TRIP_QUERY_KEYS.companies,
     queryFn: fetchCompanies,
+  });
+}
+
+export function useTripSeatsQuery(tripId) {
+  return useQuery({
+    queryKey: TRIP_QUERY_KEYS.seats(tripId),
+    queryFn: () => fetchTripSeats(tripId),
+    enabled: Boolean(tripId),
   });
 }

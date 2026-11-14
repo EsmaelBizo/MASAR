@@ -1,5 +1,6 @@
 import { useBookingStore } from "../../../../../../store/use-booking-store";
 import { useToastStore } from "../../../../../../store/use-toast-store";
+import { useTripSeatsQuery } from "../../../../../../hooks/use-trips-query";
 import { SeatLegendBar } from "./components/seat-legend-bar/seat-legend-bar";
 import { BusCabinMap } from "./components/bus-cabin-map/bus-cabin-map";
 import { SeatSelectionAside } from "./components/seat-selection-aside/seat-selection-aside";
@@ -8,6 +9,7 @@ export function SeatStage({ people, trip }) {
   const selectedSeats = useBookingStore((state) => state.selectedSeats);
   const toggleSeat = useBookingStore((state) => state.toggleSeat);
   const showToast = useToastStore((state) => state.showToast);
+  const tripSeatsQuery = useTripSeatsQuery(trip?.backendId || trip?.id);
 
   const isVip =
     !trip || trip.busClass === "vip" || trip.company?.busClass === "vip";
@@ -43,11 +45,25 @@ export function SeatStage({ people, trip }) {
 
       <SeatLegendBar />
 
+      {tripSeatsQuery.isLoading && (
+        <p className="mb-4 text-[13px] font-bold text-muted">
+          جارٍ تحميل المقاعد المحجوزة...
+        </p>
+      )}
+      {tripSeatsQuery.isError && (
+        <p className="mb-4 text-[13px] font-bold text-danger">
+          تعذر تحميل حالة المقاعد. أعد المحاولة قبل اختيار المقعد.
+        </p>
+      )}
+
       <div className="grid grid-cols-[minmax(290px,1.15fr)_minmax(200px,0.85fr)] max-[650px]:grid-cols-1 gap-6 max-[1150px]:gap-4">
         <BusCabinMap
           isVip={isVip}
           selectedSeats={selectedSeats}
           onSeatClick={handleSeatClick}
+          occupiedSeats={tripSeatsQuery.data?.occupiedSeats || []}
+          isLoading={tripSeatsQuery.isLoading}
+          isError={tripSeatsQuery.isError}
         />
         <SeatSelectionAside selectedSeats={selectedSeats} people={people} />
       </div>
