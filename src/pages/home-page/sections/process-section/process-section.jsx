@@ -46,7 +46,7 @@ export function ProcessSection() {
               <div className="mb-5 flex items-center justify-between">
                 <div
                   className={cn(
-                    'grid size-[54px] place-items-center rounded-2xl border transition-transform duration-350 ease-[var(--ease-masar-spring)] group-hover:scale-110 group-hover:-rotate-3',
+                    'grid size-[54px] place-items-center rounded-2xl border',
                     ICON_COLOR_MAP[index] || ICON_COLOR_MAP[0]
                   )}
                 >
