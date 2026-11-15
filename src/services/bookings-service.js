@@ -1,4 +1,5 @@
 import { apiClient } from './api-client';
+import { getCompanyById } from '../constants/companies';
 
 function unwrap(data) {
   return data?.value ?? data?.data ?? data;
@@ -9,6 +10,22 @@ function normalizeBooking(booking) {
   const origin = booking.origin || trip.origin;
   const destination = booking.destination || trip.destination;
   const company = booking.company || trip.company;
+  const companyId = company?.id || booking.companyId || trip.companyId;
+  const companyName =
+    company?.name ||
+    company?.title ||
+    booking.companyName ||
+    trip.companyName;
+  const fallbackCompany = getCompanyById(companyId, { name: companyName });
+  const normalizedCompany = {
+    ...fallbackCompany,
+    ...(company || {}),
+    id: company?.id || companyId || fallbackCompany.id,
+    name: companyName || fallbackCompany.name,
+    short:
+      company?.short ||
+      (companyName || fallbackCompany.name).trim().slice(0, 1),
+  };
 
   return {
     ...booking,
@@ -18,7 +35,8 @@ function normalizeBooking(booking) {
     originName: origin?.name || origin?.title || booking.originName,
     destinationName:
       destination?.name || destination?.title || booking.destinationName,
-    companyId: company?.id || booking.companyId || trip.companyId,
+    companyId,
+    company: normalizedCompany,
     date: booking.date || trip.date || trip.departureAt?.slice(0, 10),
     departure:
       booking.departure ||

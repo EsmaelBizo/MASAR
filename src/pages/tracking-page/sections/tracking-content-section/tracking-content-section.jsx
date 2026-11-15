@@ -10,7 +10,7 @@ export function TrackingContentSection({
   originCity,
   destinationCity,
 }) {
-  const company = getCompanyById(activeBooking.companyId);
+  const company = activeBooking.company || getCompanyById(activeBooking.companyId);
   const approxDist = calculateApproxDistance(originCity, destinationCity);
 
   const [progress, setProgress] = useState(0.48);

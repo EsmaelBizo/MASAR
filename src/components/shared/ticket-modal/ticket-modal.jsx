@@ -35,7 +35,8 @@ export function TicketModal() {
 
   if (!activeTicketModal) return null;
 
-  const company = getCompanyById(activeTicketModal.companyId);
+  const company =
+    activeTicketModal.company || getCompanyById(activeTicketModal.companyId);
   const originCity = {
     ...getCityById(
       activeTicketModal.originName || activeTicketModal.origin

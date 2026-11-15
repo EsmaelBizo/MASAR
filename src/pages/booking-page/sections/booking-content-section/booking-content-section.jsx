@@ -119,6 +119,7 @@ export function BookingContentSection() {
         departure: activeTrip.departure,
         arrive: activeTrip.arrive,
         companyId: activeTrip.company.id,
+        company: activeTrip.company,
         busClass: activeTrip.busClass,
         classLabel: activeTrip.classLabel,
         seats: [...selectedSeats],

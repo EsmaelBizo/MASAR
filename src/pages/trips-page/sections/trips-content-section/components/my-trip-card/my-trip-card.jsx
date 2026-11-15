@@ -14,7 +14,7 @@ export function MyTripCard({ booking }) {
   const setTrackId = useBookingStore((state) => state.setTrackId);
   const openTicketModal = useBookingStore((state) => state.openTicketModal);
 
-  const company = getCompanyById(booking.companyId);
+  const company = booking.company || getCompanyById(booking.companyId);
   const originCity = {
     ...getCityById(booking.originName || booking.origin),
     name: booking.originName || getCityById(booking.origin).name,

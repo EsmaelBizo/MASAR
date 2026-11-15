@@ -49,6 +49,13 @@ export const COMPANIES = [
   },
 ];
 
-export function getCompanyById(id) {
-  return COMPANIES.find((c) => c.id === id) || COMPANIES[0];
+export function getCompanyById(id, company) {
+  return (
+    COMPANIES.find(
+      (item) =>
+        String(item.id) === String(id) ||
+        item.name === company?.name ||
+        item.name === company?.title
+    ) || COMPANIES[0]
+  );
 }
