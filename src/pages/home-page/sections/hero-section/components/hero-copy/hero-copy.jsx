@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../../../../constants/routes";
 import { Eyebrow } from "../../../../../../components/ui/eyebrow";
 import { SairnaIcon } from "../../../../../../components/ui/sairna-icon";
+import { useBookingStore } from "../../../../../../store/use-booking-store";
 
 const STAR_INDICES = [1, 2, 3, 4, 5];
 
@@ -12,9 +13,9 @@ const HERO_FEATURES = [
 ];
 
 const QUICK_ROUTES = [
-  { label: "دمشق ⟵ حلب", badge: "M5 VIP" },
-  { label: "دمشق ⟵ اللاذقية", badge: "الساحل" },
-  { label: "حلب ⟵ حمص", badge: "مباشر" },
+  { origin: "damascus", destination: "aleppo", label: "دمشق ⟵ حلب", badge: "M5 VIP" },
+  { origin: "damascus", destination: "latakia", label: "دمشق ⟵ اللاذقية", badge: "الساحل" },
+  { origin: "aleppo", destination: "homs", label: "حلب ⟵ حمص", badge: "مباشر" },
 ];
 
 const AVATAR_ITEMS = [
@@ -25,6 +26,14 @@ const AVATAR_ITEMS = [
 ];
 
 export function HeroCopy() {
+  const navigate = useNavigate();
+  const setSearch = useBookingStore((state) => state.setSearch);
+
+  const handlePopularTripSelect = (trip) => {
+    setSearch(trip);
+    navigate(ROUTES.RESULTS);
+  };
+
   return (
     <div className="relative z-10 pb-2">
       <div className="flex flex-wrap items-center gap-2.5">
@@ -85,37 +94,38 @@ export function HeroCopy() {
                 {item.char}
               </span>
             ))}
-          </div>
-          <div>
-            <div className="flex items-center gap-1 text-[13px] text-accent [&_svg]:fill-[#C88A32]">
-              {STAR_INDICES.map((star) => (
-                <SairnaIcon key={star} name="star" size={14} />
-              ))}
-              <b className="mr-1.5 font-tabular text-[13.5px] text-white">
-                4.9 / 5
-              </b>
             </div>
-            <small className="block text-[11.5px] text-[#CBD7E4]">
-              ثقة آلاف المسافرين عبر 14 محافظة سورية
-            </small>
+            <div>
+              <div className="flex items-center gap-1 text-[13px] text-accent [&_svg]:fill-[#C88A32]">
+                {STAR_INDICES.map((star) => (
+                  <SairnaIcon key={star} name="star" size={14} />
+                ))}
+                <b className="mr-1.5 font-tabular text-[13.5px] text-white">
+                  4.9 / 5
+                </b>
+              </div>
+              <small className="block text-[11.5px] text-[#CBD7E4]">
+                ثقة آلاف المسافرين عبر 14 محافظة سورية
+              </small>
+            </div>
           </div>
-        </div>
 
         <div className="flex flex-wrap items-center gap-2 max-[650px]:w-full">
           <span className="text-[11px] font-bold text-[#94A3B8]">
             الخطوط الأكثر طلباً:
           </span>
           {QUICK_ROUTES.map((item) => (
-            <Link
+            <button
               key={item.label}
-              to={ROUTES.RESULTS}
+              type="button"
+              onClick={() => handlePopularTripSelect(item)}
               className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/8 px-2.5 py-1 text-[11px] font-bold text-white backdrop-blur-md transition-all duration-200 hover:border-accent/60 hover:bg-accent/20"
             >
               <span>{item.label}</span>
               <span className="rounded bg-accent/25 px-1.5 py-0.5 text-[9.5px] text-accent">
                 {item.badge}
               </span>
-            </Link>
+            </button>
           ))}
         </div>
       </div>
