@@ -15,9 +15,9 @@ export function BrandLogo({ variant = 'default', className }) {
       aria-label="مَسار | MASAR - الرئيسية"
     >
       <span className="grid size-12 max-[650px]:size-[40px] place-items-center">
-        <img src={logoSvg} alt="شعار مَسار" className="size-full dark:hidden" />
+        <img src={navyLogoSvg} alt="شعار مَسار" className="size-full dark:hidden" />
         <img
-          src={navyLogoSvg}
+          src={logoSvg}
           alt=""
           aria-hidden="true"
           className="hidden size-full dark:block"

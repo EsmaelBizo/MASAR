@@ -1,77 +1,82 @@
-export function MiniRouteGraphic() {
+import { useState } from 'react';
+
+const VERIFIED_COACH_IMAGE =
+  'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=85';
+
+/**
+ * MiniRouteGraphic — Awwwards Neo-Heritage Edition
+ * بطاقة معاينة خط سير البولمان (دمشق ⟵ حلب) عبر أوتوستراد M5
+ * تتضمن صورة فوتوغرافية عالية الدقة لحافلة بولمان مع طبقة تدرج متوافقة مع الهوية البصرية
+ */
+export function MiniRouteGraphic({
+  imageSrc = VERIFIED_COACH_IMAGE,
+  origin = 'دمشق',
+  originTerminal = 'كراج القابون',
+  destination = 'حلب',
+  destinationTerminal = 'كراج الراموسة',
+  distance = '355 كم',
+  duration = '4س 30د',
+  statusLabel = 'مباشر • أوتوستراد M5',
+}) {
+  const [imgFailed, setImgFailed] = useState(false);
+
   return (
-    <svg
-      className="h-[280px] max-[900px]:h-[220px] max-[650px]:h-[225px] w-full rounded-[18px] border border-border shadow-[0_12px_30px_rgba(22,58,95,0.08)] transition-shadow duration-300 hover:shadow-card-md"
-      viewBox="0 0 560 310"
+    <div
+      dir="rtl"
       role="img"
-      aria-label="معاينة خط سير البولمان دمشق إلى حلب عبر أوتوستراد M5"
+      aria-label={`معاينة خط سير البولمان ${origin} إلى ${destination} عبر أوتوستراد M5`}
+      className="group relative h-[280px] max-[900px]:h-[230px] max-[650px]:h-[225px] w-full overflow-hidden rounded-[20px] border border-[#C88A32]/30 bg-[#0F2944] shadow-[0_18px_44px_rgba(22,58,95,0.22)] transition-all duration-500 hover:border-[#C88A32]/65 hover:shadow-[0_24px_60px_rgba(22,58,95,0.32)]"
     >
-      <defs>
-        <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
-          <circle cx="2" cy="2" r="1.3" fill="#C88A32" opacity="0.35" />
-        </pattern>
-      </defs>
-      <rect width="560" height="310" rx="18" fill="#F7F4EE" />
-      <rect width="560" height="310" fill="url(#dots)" />
-      <path
-        d="M30 251Q180 189 230 249T530 179M20 78Q183 127 270 52T530 82"
-        fill="none"
-        stroke="#E6E1D6"
-        strokeWidth="36"
-      />
-      <path
-        d="M100 47Q183 127 270 52T530 82M20 250Q180 189 230 249T530 179"
-        fill="none"
-        stroke="#FFFFFF"
-        strokeWidth="2"
-        strokeDasharray="9 7"
-      />
-      <path
-        d="M130 84C230 114 200 212 339 205S435 175 461 246"
-        fill="none"
-        stroke="#2E6F5E"
-        strokeWidth="8"
-        strokeLinecap="round"
-      />
-      <path
-        d="M130 84C230 114 200 212 339 205S435 175 461 246"
-        fill="none"
-        stroke="#C88A32"
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeDasharray="10 8"
-        className="animate-route-flow"
-      />
-      <circle cx="130" cy="84" r="13" fill="#fff" stroke="#2E6F5E" strokeWidth="6" />
-      <circle cx="461" cy="246" r="13" fill="#fff" stroke="#163A5F" strokeWidth="6" />
-      <g transform="translate(315 199)">
-        <circle
-          r="34"
-          fill="none"
-          stroke="#C88A32"
-          strokeWidth="2.5"
-          className="animate-ping opacity-30"
+      {/* 1. الصورة الفوتوغرافية المضمّنة من الإنترنت مع معالجة لونية متناغمة مع الهوية */}
+      {!imgFailed ? (
+        <img
+          src={imageSrc}
+          alt={`بولمان السفر بين ${origin} و${destination}`}
+          loading="lazy"
+          onError={() => setImgFailed(true)}
+          className="h-full w-full object-cover object-center brightness-95 contrast-[1.06] saturate-[1.08] transition-transform duration-700 ease-out group-hover:scale-[1.05]"
         />
-        <circle r="28" fill="#fff" stroke="#C88A32" strokeWidth="3" />
-        <rect x="-15" y="-10" width="30" height="20" rx="4" fill="#163A5F" />
-        <rect x="-12" y="-6" width="24" height="6" rx="2" fill="#F7F4EE" />
-        <circle cx="-9" cy="11" r="4" fill="#C88A32" />
-        <circle cx="9" cy="11" r="4" fill="#C88A32" />
-      </g>
-      <g
-        fontFamily="Readex Pro, IBM Plex Sans Arabic, sans-serif"
-        fontSize="16"
-        fontWeight="700"
-        fill="#163A5F"
-      >
-        <text x="185" y="54">
-          حلب (الراموسة)
-        </text>
-        <text x="520" y="284">
-          دمشق (القابون)
-        </text>
-      </g>
-    </svg>
+      ) : (
+        /* بديل احتياطي هندسي بألوان الهوية في حال عدم توفر الإنترنت */
+        <div
+          aria-hidden="true"
+          className="h-full w-full bg-gradient-to-br from-[#163A5F] via-[#0F2944] to-[#2E6F5E]"
+        />
+      )}
+
+      {/* 2. طبقة مزج لوني بالأزرق الدمشقي والذهبي التدمري لدمج الصورة مع الهوية وضمان تباين النصوص */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#090D14]/95 via-[#163A5F]/40 to-[#090D14]/55 mix-blend-multiply"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#090D14]/90 via-transparent to-[#090D14]/35"
+      />
+
+      {/* 3. شريط الأبلق العلوي الدقيق */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-[4px] bg-[repeating-linear-gradient(90deg,#163A5F_0px,#163A5F_42px,#C88A32_42px,#C88A32_84px,#2E6F5E_84px,#2E6F5E_126px)]"
+      />
+
+      {/* 4. الشارات العلوية (الحالة والمسافة) */}
+      <div className="absolute inset-x-4 top-4 flex items-center justify-between gap-2">
+        <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#090D14]/65 px-3 py-1 text-[11px] font-bold text-[#F7F4EE] backdrop-blur-md">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3B8C77] opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#3B8C77]" />
+          </span>
+          {statusLabel}
+        </span>
+
+        <span className="rounded-full border border-[#C88A32]/40 bg-[#090D14]/65 px-3 py-1 font-['Plus_Jakarta_Sans','IBM_Plex_Sans_Arabic',sans-serif] text-[11px] font-bold tabular-nums text-[#D99B42] backdrop-blur-md">
+          {distance} • {duration}
+        </span>
+      </div>
+
+
+    </div>
   );
 }
 
